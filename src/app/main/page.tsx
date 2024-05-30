@@ -21,7 +21,7 @@ const Page = async () => {
 
     const subscriptionPlan = await getUserSubscriptionPlan()
 
-    return <div>hello</div>
+    return <div>hello world</div>
         
 
 }
