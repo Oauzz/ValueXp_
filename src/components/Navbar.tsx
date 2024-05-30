@@ -7,12 +7,12 @@ import {
   getKindeServerSession,
 } from '@kinde-oss/kinde-auth-nextjs/server'
 import { ArrowRight } from 'lucide-react'
-// import UserAccountNav from './UserAccountNav'
-// import MobileNav from './MobileNav'
+import UserAccountNav from './UserAccountNav'
+import MobileNav from './MobileNav'
 
 const Navbar = async () => {
-//   const { getUser } = getKindeServerSession()
-//   const user = await getUser()
+  const { getUser } = getKindeServerSession()
+  const user = await getUser()
 
   return (
     <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
@@ -24,11 +24,11 @@ const Navbar = async () => {
             <span>ValueXp.</span>
           </Link>
 
-          {/* <MobileNav isAuth={!!user} /> */}
+          <MobileNav isAuth={!!user} />
 
           <div className='hidden items-center space-x-4 sm:flex'>
 
-          <>
+          {/* <>
                 <Link
                   href='/pricing'
                   className={buttonVariants({
@@ -51,8 +51,8 @@ const Navbar = async () => {
                   Commencer{' '}
                   <ArrowRight className='ml-1.5 h-5 w-5' />
                 </RegisterLink>
-                </>
-            {/* {!user ? ( 
+                </> */}
+            {!user ? ( 
               <>
                 <Link
                   href='/pricing'
@@ -80,12 +80,12 @@ const Navbar = async () => {
              ) : (
               <>
                 <Link
-                  href='/dashboard'
+                  href='/main'
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',
                   })}>
-                  Tableau de bord
+                  Main
                 </Link>
 
                 <UserAccountNav
@@ -98,7 +98,7 @@ const Navbar = async () => {
                   imageUrl={user.picture ?? ''}
                 />
               </>
-            )}  */}
+            )} 
           </div>
         </div>
       </MaxWidthWrapper>
