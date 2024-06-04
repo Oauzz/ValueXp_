@@ -218,7 +218,7 @@ const Page = async () => {
                           })}>
                           {user ?
                            ('Vous êtes là') : 
-                           (<>'Inscrivez-vous'<ArrowRight className='h-5 w-5 ml-1.5' /></>)
+                           (<>Inscrivez-vous<ArrowRight className='h-5 w-5 ml-1.5' /></>)
                            }
                         </Link>
                       ) : user ? (
@@ -229,7 +229,7 @@ const Page = async () => {
                           className={buttonVariants({
                             className: 'w-full',
                           })}>
-                          'Inscrivez-vous'
+                          Inscrivez-vous
                           <ArrowRight className='h-5 w-5 ml-1.5' />
                         </Link>
                       )}
