@@ -1,14 +1,14 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { buttonVariants } from "@/components/ui/button";
+import { getKindeServerSession, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
-// import {
-//   RegisterLink,
-// } from '@kinde-oss/kinde-auth-nextjs/server' 
-
 import Link from "next/link";
 
 
 export default function Home() {
+  const { getUser } = getKindeServerSession()
+  const user = getUser()
+
   return (
 <>
     
@@ -27,8 +27,19 @@ export default function Home() {
         ValuExp vous permet de suivre et d&apos;estimer les prix des biens immobiliers vendus 
         et loués en toute simplicité. Restez informé des évolutions du marché et prenez des décisions 
         éclairées pour vos investissements.
-      </p>
-      <Link
+      </p>{
+        !user ? (
+          <RegisterLink
+                  className={buttonVariants({
+                    size: 'lg',
+                    className: 'mt-5',
+                  })}>
+                  Commencer{' '}
+                  <ArrowRight className='ml-1.5 h-5 w-5' />
+        </RegisterLink>
+
+        ):(
+          <Link
           className={buttonVariants({
             size: 'lg',
             className: 'mt-5',
@@ -38,14 +49,12 @@ export default function Home() {
           <ArrowRight className='ml-2 h-5 w-5' />
         </Link>
 
-        {/* <RegisterLink
-                  className={buttonVariants({
-                    size: 'lg',
-                    className: 'mt-5',
-                  })}>
-                  Commencer{' '}
-                  <ArrowRight className='ml-1.5 h-5 w-5' />
-        </RegisterLink> */}
+        )
+      }
+
+
+
+      
     </MaxWidthWrapper>
 
     {/* value proposition section */}
@@ -173,3 +182,10 @@ export default function Home() {
 </>
   );
 }
+
+
+
+
+      
+
+        // {/*  */}

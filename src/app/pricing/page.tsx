@@ -76,7 +76,7 @@ const Page = async () => {
 
   return (
     <>
-      <MaxWidthWrapper className='mb-8 mt-24 text-center max-w-5xl'>
+      <MaxWidthWrapper className='mb-4 mt-12 text-center max-w-5xl'>
 
       <div className='relative isolate'>
           <div

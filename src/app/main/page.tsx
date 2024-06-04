@@ -1,20 +1,8 @@
 
-import { redirect } from 'next/navigation'
 
-const Page = async () => {
+import { redirect} from 'next/navigation'
 
+const Page =  () => {
     redirect('/')
-
-    // if (dbUser.role=="admin") 
-    //     redirect('/')
-    // else 
-    //     redirect('/main/clientUser')
-
-
-
-    
-        
-    // return <h1>hello</h1>
-
 }
 export default Page 
