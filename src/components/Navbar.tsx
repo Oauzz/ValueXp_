@@ -9,10 +9,26 @@ import {
 import { ArrowRight } from 'lucide-react'
 import UserAccountNav from './UserAccountNav'
 import MobileNav from './MobileNav'
+import { getUserSubscriptionPlan } from '@/lib/stripe'
+import { db } from '@/db'
+import { redirect } from 'next/navigation'
+
 
 const Navbar = async () => {
   const { getUser } = getKindeServerSession()
-  const user = await getUser()
+  const user_ = await getUser()
+  if(!user_||!user_.id) redirect('/auth-callback?origin=main')
+
+    const subscriptionPlan = await getUserSubscriptionPlan()
+    
+    const dbUser = await db.user.findFirst({
+        where: {
+            id: user_?.id
+        }
+        })
+    
+    if(!dbUser) redirect('/auth-callback?origin=main')
+
 
   return (
     <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
@@ -24,81 +40,146 @@ const Navbar = async () => {
             <span>ValueXp.</span>
           </Link>
 
-          <MobileNav isAuth={!!user} />
+          <MobileNav isAuth={!!user_} />
 
           <div className='hidden items-center space-x-4 sm:flex'>
 
-          {/* <>
-                <Link
-                  href='/pricing'
-                  className={buttonVariants({
-                    variant: 'ghost',
-                    size: 'sm',
-                  })}>
-                  Tarifs
-                </Link>
-                <LoginLink
-                  className={buttonVariants({
-                    variant: 'ghost',
-                    size: 'sm',
-                  })}>
-                  Connexion
-                </LoginLink>
-                <RegisterLink
-                  className={buttonVariants({
-                    size: 'sm',
-                  })}>
-                  Commencer{' '}
-                  <ArrowRight className='ml-1.5 h-5 w-5' />
-                </RegisterLink>
-                </> */}
-            {!user ? ( 
+            
+              {!user_ ? (
+                <>
+                  <Link
+                    href='/pricing'
+                    className={buttonVariants({
+                      variant: 'ghost',
+                      size: 'sm',
+                    })}>
+                    Pricing
+                  </Link>
+                  <LoginLink
+                    className={buttonVariants({
+                      variant: 'ghost',
+                      size: 'sm',
+                    })}>
+                    Sign in
+                  </LoginLink>
+                  <RegisterLink
+                    className={buttonVariants({
+                      size: 'sm',
+                    })}>
+                    Get started{' '}
+                    <ArrowRight className='ml-1.5 h-5 w-5' />
+                  </RegisterLink>
+                </>
+              ) : (
+                <>
+            {
+              dbUser.role=="admin" ? 
+              (
+                  <>
+                      <Link
+                            href='/main/estimation'
+                            className={buttonVariants({
+                              variant: 'ghost',
+                              size: 'sm',
+                            })}>
+                            Estimation
+                      </Link>
+                      <Link
+                            href='/main/notification'
+                            className={buttonVariants({
+                              variant: 'ghost',
+                              size: 'sm',
+                            })}>
+                            Notifications
+                      </Link>
+                      <Link
+                            href='/main/stats'
+                            className={buttonVariants({
+                              variant: 'ghost',
+                              size: 'sm',
+                            })}>
+                            Statistiques
+                      </Link>
+                      <Link
+                            href='/main/adminDashboard'
+                            className={buttonVariants({
+                              variant: 'ghost',
+                              size: 'sm',
+                            })}>
+                              Tableau de bord
+                      </Link>
+                  </>
+              ):(
               <>
-                <Link
-                  href='/pricing'
+                {subscriptionPlan?.isSubscribed ? 
+                  (
+                  <>
+                  <Link
+                        href='/main/estimation'
+                        className={buttonVariants({
+                          variant: 'ghost',
+                          size: 'sm',
+                        })}>
+                        Estimation
+                  </Link>
+                  <Link
+                        href='/main/notification'
+                        className={buttonVariants({
+                          variant: 'ghost',
+                          size: 'sm',
+                        })}>
+                        Notifications
+                  </Link>
+                  <Link
+                        href='/main/stats'
+                        className={buttonVariants({
+                          variant: 'ghost',
+                          size: 'sm',
+                        })}>
+                        Statistiques
+                  </Link>
+                  </>
+                ) : (
+                <>
+                  <Link
+                    href='/pricing'
+                    className={buttonVariants({
+                      variant: 'ghost',
+                      size: 'sm',
+                    })}>
+                    Tarifs
+                  </Link>
+                  <Link
+                  href='/main/estimation'
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',
                   })}>
-                  Tarifs
-                </Link>
-                <LoginLink
+                  Estimation
+                  </Link>
+                  <Link
+                  href='/main/notification'
                   className={buttonVariants({
                     variant: 'ghost',
                     size: 'sm',
                   })}>
-                  Connexion
-                </LoginLink>
-                <RegisterLink
-                  className={buttonVariants({
-                    size: 'sm',
-                  })}>
-                  Commencer{' '}
-                  <ArrowRight className='ml-1.5 h-5 w-5' />
-                </RegisterLink>
-              </>
-             ) : (
-              <>
-                <Link
-                  href='/main'
-                  className={buttonVariants({
-                    variant: 'ghost',
-                    size: 'sm',
-                  })}>
-                  Main
-                </Link>
+                  Notifications
+                  </Link>
+                  </>
+                )}</>
 
-                <UserAccountNav
-                  name={
-                    !user.given_name || !user.family_name
-                      ? 'Your Account'
-                      : `${user.given_name} ${user.family_name}`
-                  }
-                  email={user.email ?? ''}
-                  imageUrl={user.picture ?? ''}
-                />
-              </>
-            )} 
+              )
+            }</>)}
+            <UserAccountNav
+                          name={
+                          !user_?.given_name || !user_?.family_name
+                              ? 'Your Account'
+                              : `${user_?.given_name} ${user_?.family_name}`
+                          }
+                          email={user_?.email ?? ''}
+                          imageUrl={user_?.picture ?? ''}
+                          role={dbUser.role ?? ''}
+                      />
           </div>
         </div>
       </MaxWidthWrapper>

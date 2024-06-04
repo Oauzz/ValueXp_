@@ -39,6 +39,7 @@ export const appRouter = router({
           email: user.email,
           given_name: user.given_name || "" ,
           family_name: user.family_name || "" ,
+          role: "client",
         },
       })
     }

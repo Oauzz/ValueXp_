@@ -18,12 +18,14 @@ interface UserAccountNavProps {
   email: string | undefined
   name: string
   imageUrl: string
+  role: string
 }
 
 const UserAccountNav = async ({
   email,
   imageUrl,
   name,
+  role,
 }: UserAccountNavProps) => {
   const subscriptionPlan = await getUserSubscriptionPlan()
 
@@ -70,25 +72,26 @@ const UserAccountNav = async ({
         </div>
 
         <DropdownMenuSeparator />
+        {
+          role=="admin" ? (<></>):(
+            <>
+            <DropdownMenuItem asChild>
+              {subscriptionPlan?.isSubscribed ? (
+                <Link href='/main/billing'>
+                  Gérer l&apos;abonnement
+                </Link>
+              ) : (
+                <Link href='/pricing'>
+                  Passer Pro{' '}
+                  <Gem className='text-blue-600 h-4 w-4 ml-1.5' />
+                </Link>
+              )} 
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            </>
 
-        <DropdownMenuItem asChild>
-          <Link href='/main'>Main</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild>
-          {subscriptionPlan?.isSubscribed ? (
-            <Link href='/main/billing'>
-              Gérer l&apos;abonnement
-            </Link>
-          ) : (
-            <Link href='/pricing'>
-              Mise à niveau{' '}
-              <Gem className='text-blue-600 h-4 w-4 ml-1.5' />
-            </Link>
-          )}
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
+          )            
+        }
 
         <DropdownMenuItem className='cursor-pointer'>
             <LogoutLink>Se déconnecter</LogoutLink>

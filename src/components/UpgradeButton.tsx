@@ -16,7 +16,7 @@ const UpgradeButton = () => {
     <Button 
     onClick={() => createStripeSession()} 
     className='w-full'>
-      Upgrade now <ArrowRight className='h-5 w-5 ml-1.5' />
+      Passer Pro <ArrowRight className='h-5 w-5 ml-1.5' />
     </Button>
   )
 }
