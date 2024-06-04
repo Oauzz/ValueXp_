@@ -30,7 +30,7 @@ const Page = async () => {
         {
           text: 'Estimations simples',
           footnote:
-            "Peu de caractères d'estimation.",
+            "Peu de caractères d&apos;estimation.",
         },
         {
           text: 'Recevoir des notifications',
@@ -43,19 +43,19 @@ const Page = async () => {
         {
           text: 'Accée aux statistiques',
           footnote:
-            "Visualisation de l'évolution",
+            "Visualisation de l&apos;évolution",
           negative: true,
         }
       ],
     },
     {
       plan: 'Pro',
-      tagline: "Pour l'analyse du marché.",
+      tagline: "Pour l&apos;analyse du marché.",
       features: [
         {
           text: 'Estimations plus complexes',
           footnote:
-            "Nombreux caractères d'estimation.",
+            "Nombreux caractères d&apos;estimation.",
         },
         {
           text: 'Customiser ses notifications',
@@ -68,7 +68,7 @@ const Page = async () => {
         {
           text: 'Accée aux statistiques',
           footnote:
-            "Visualisation de l'évolution",
+            "Visualisation de l&apos;évolution",
         }
       ],
     },
