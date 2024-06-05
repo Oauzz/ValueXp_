@@ -176,7 +176,12 @@ const Navbar = async () => {
                   </Link>
                   </>
                 )}
-                <UserAccountNav
+                
+                      </>
+
+              )
+            }
+            <UserAccountNav
                           name={
                           !user_?.given_name || !user_?.family_name
                               ? 'Your Account'
@@ -186,10 +191,6 @@ const Navbar = async () => {
                           imageUrl={user_?.picture ?? ''}
                           role={dbUser.role ?? ''}
                       />
-                      </>
-
-              )
-            }
             
           </div>
         </div>

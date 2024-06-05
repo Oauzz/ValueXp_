@@ -44,7 +44,7 @@ export default function Home() {
             size: 'lg',
             className: 'mt-5',
           })}
-          href='/main'>
+          href='/main/estimation'>
           Commencer{' '}
           <ArrowRight className='ml-2 h-5 w-5' />
         </Link>

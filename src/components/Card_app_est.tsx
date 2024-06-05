@@ -147,7 +147,7 @@ const Card_app_est = ()=>{
     return (
         <Card >
             <CardContent className="mt-4">
-                <div className="grid gap-6 sm:grid-cols-6">
+                <div className="grid gap-6 grid-cols-6">
                     <div className="grid gap-3 ">
                         <Label htmlFor="city">Ville</Label>
                         <CityDropDown/>
