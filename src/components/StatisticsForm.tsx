@@ -32,7 +32,7 @@ const StatisticsForm = (
                 <h1 className='max-w-5xl text-4xl font-bold md:text-6xl lg:text-5xl'>
                     {' '}
                     <span className='text-green-600'>Suivez</span>{' '}
-                    l'évolution des prix.
+                    l&apos;évolution des prix.
                 </h1>
                 <RadioGroup defaultValue="Vendre" className="flex mt-4 space-x-8">
                 <div className="flex items-center space-x-2">
