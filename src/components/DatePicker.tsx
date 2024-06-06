@@ -2,26 +2,33 @@
 
 import * as React from "react"
 import { addDays, format } from "date-fns"
-import {fr} from 'date-fns/locale'
+import { fr } from 'date-fns/locale'
 import { Calendar as CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
-export function DatePickerWithRange({
-  className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+interface DatePickerWithRangeProps extends React.HTMLAttributes<HTMLDivElement> {
+  onDateChange: (date: DateRange | undefined) => void;
+}
+
+export function DatePickerWithRange({ className, onDateChange }: DatePickerWithRangeProps) {
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 20),
-  })
+  });
+
+  const prevDateRef = React.useRef<DateRange | undefined>(date);
+
+  React.useEffect(() => {
+    if (prevDateRef.current !== date) {
+      prevDateRef.current = date;
+      onDateChange(date);
+    }
+  }, [date, onDateChange]);
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -30,9 +37,8 @@ export function DatePickerWithRange({
           <Button
             id="date"
             variant={"outline"}
-            // w-400px
             className={cn(
-              " justify-start text-left font-normal",
+              "justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
