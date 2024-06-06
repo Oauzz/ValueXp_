@@ -23,12 +23,8 @@ import { db } from '@/db'
 const Navbar = async () => {
   const { getUser } = getKindeServerSession()
   const user_ = await getUser()
-  const dbUser = await db.user.findFirst({
-    where: {
-        id: user_?.id
-    }
-    })
-  if(!user_||!user_.id||!dbUser) 
+  
+  if(!user_||!user_.id) 
     return (
       <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
       <MaxWidthWrapper>
@@ -70,6 +66,11 @@ const Navbar = async () => {
       </MaxWidthWrapper>
     </nav>
   )
+    const dbUser = await db.user.findFirst({
+      where: {
+          id: user_?.id
+      }
+      })
     const subscriptionPlan = await getUserSubscriptionPlan()
     
   return (
@@ -87,7 +88,7 @@ const Navbar = async () => {
           <div className='hidden items-center space-x-4 sm:flex'>
 
             
-              {dbUser.role=="admin" ? 
+              {dbUser?.role=="admin" ? 
               (
                   <>
                       <Link
@@ -194,7 +195,7 @@ const Navbar = async () => {
                           }
                           email={user_?.email ?? ''}
                           imageUrl={user_?.picture ?? ''}
-                          role={dbUser.role ?? ''}
+                          role={dbUser?.role ?? ''}
                       />
             
           </div>

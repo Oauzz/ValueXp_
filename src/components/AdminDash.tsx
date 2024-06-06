@@ -8,6 +8,7 @@ import { Button } from "./ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import Link from "next/link"
 import { Badge } from "./ui/badge"
+import RadarCities from "./charts/RadarCities"
 
 
 const FreqDropDown =()=>{
@@ -18,9 +19,9 @@ const FreqDropDown =()=>{
                     <SelectValue placeholder="Select frequency" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="3h">Chaque 3 Heures</SelectItem>
-                    <SelectItem value="6h">Chaque 6 Heures</SelectItem>
-                    <SelectItem value="12h">Chaque 12 Heures</SelectItem>
+                    <SelectItem value="3h">Chaque 12 Heures</SelectItem>
+                    <SelectItem value="6h">Chaque Jour</SelectItem>
+                    <SelectItem value="12h">Chaque semaine</SelectItem>
                 </SelectContent>
             </Select>
         </>
@@ -60,7 +61,7 @@ const AdminDash =()=>{
                     <ScrollText className="h-4 w-4 text-muted-foreground" /> 
                   </CardHeader>
                   <CardContent>
-                    <div className="text-4xl font-bold">988,876</div>
+                    <div className="text-4xl font-bold">98,876</div>
                     <p className="text-xs text-muted-foreground">
                       +8.1% de la dernière alimentation
                     </p> 
@@ -74,7 +75,7 @@ const AdminDash =()=>{
                     <SearchCheck className="h-4 w-4 text-muted-foreground" /> 
                   </CardHeader>
                   <CardContent>
-                    <div className="text-4xl font-bold">579,810</div>
+                    <div className="text-4xl font-bold">49,810</div>
                     <p className="text-xs text-muted-foreground">
                       +31% de la dernière alimentation
                     </p> 
@@ -147,9 +148,23 @@ const AdminDash =()=>{
                 <TableBody>
                   <TableRow>
                     <TableCell>
-                      <div className="font-medium">dar sa3ada</div>
+                      <div className="font-medium">studio à louer 50 m² à Casablanca</div>
                       <div className="hidden text-sm text-muted-foreground md:inline">
-                      <Link href="https://avito.ma/">avito.ma/sa3ada</Link>
+                      <Link href="https://www.avito.ma/fr/2_mars/appartements/studio__à_louer_50_m²_à_Casablanca_54884792.htm/">https://www.avito.ma/fr/2_mars/appartements/studio__à_louer_50_m²_à_Casablanca_54884792.htm</Link>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-right">
+                    <Button size="sm" className="ml-auto gap-1">
+                  Voir
+                  <Eye className="h-4 w-4" />
+              </Button>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="font-medium">Petite villa Hay El Qods Bernoussi a vendre</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                      <Link href="https://www.avito.ma/fr/sidi_bernoussi/maisons_et_villas/Petite_villa_Hay_El_Qods_Bernoussi_a_vendre_54971477.htm/">https://www.avito.ma/fr/sidi_bernoussi/maisons_et_villas/Petite_villa_Hay_El_Qods_Bernoussi_a_vendre_54971477.htm</Link>
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
@@ -176,7 +191,7 @@ const AdminDash =()=>{
             </Card>
             <ChartCard title="Apercu">
                 <RadarWebsite/>
-                <RadarWebsite/>
+                <RadarCities/>
             </ChartCard>
             </div>
             </div>
